@@ -1,0 +1,45 @@
+body {
+    padding: 0px;
+    margin: 0px;
+}
+
+#banner {
+    display: flex;
+    min-height: 80px;
+    color: rgb(22, 22, 22);
+    background-color: rgb(96, 51, 29);
+    padding-inline: 40px;
+    box-shadow: 10px 5px 5px;
+
+    font-family: 'Courier New', Courier, monospace;
+
+    justify-content: space-between;
+    align-items: center;
+}
+
+#burger{
+    font-size: 20px;
+    background-color: rgb(131, 76, 49) ;
+    border: 1px black solid;
+    border-radius: 3px;
+    padding: 2px;
+}
+
+#burger:hover{
+    cursor: pointer;
+    background-color: rgb(145, 85, 55);
+}
+
+#burger:active{
+    transform: translateY(2px);
+}
+
+#title{
+    font-size: 30px;
+}
+
+#hero {
+    display: flex;
+    height: 100dvh;
+    background-color: #fcf989;
+}
