@@ -13,12 +13,40 @@
     </header>
 
     <div id="sidebar">
-
+        
     </div>
 
-    <div id="hero">
-        Placeholder
-    </div>
+    <div id="hero"> 
+        
+        <div id="card">
+            +
+        </div>
+    
+        <div class="form-popup" id="myForm">  
+            <form id="add-item-prompt" class="form-container">
 
+                <label for="title">Title:</label>
+                <input type="text" class="prompt-text" id="form-1" name="title">
+
+                <label for="desc">Description:</label>
+                <input type="text" class="prompt-text" id="form-2" name="author" placeholder="Optional">
+
+                <label for="due-date">Due By:</label>
+                <input type="date" class="prompt-text" id="form-3" name="pages">
+
+                <label for="priority">Priority:</label>
+                <select class="prompt-text" id="form-4" name="read">
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+
+                <button type="submit" class="prompt-text" id="submit-button">Add</button>
+
+                <button class="prompt-text" id="cancel-button">Cancel</button>
+                
+            </form>
+        </div>
+    </div>
 </body>
 </html>
