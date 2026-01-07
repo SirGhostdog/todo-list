@@ -1,13 +1,25 @@
 import './style.css';
+import { createListItem } from './classes';
 
-function openForm(){
-    document.getElementById("myForm").style.display = "grid"
-}
 
-function closeForm(){
-    document.getElementById("cancel-button").style.display = "none"
-}
+const popupControl = (() => {
 
-document.getElementById("card").addEventListener("click", openForm)
+    function openForm(){
+        document.getElementById("myForm").style.display = "grid"
+    }
 
-document.getElementById("cancel-button").addEventListener("click", closeForm)
+    function closeForm(){
+        document.getElementById("cancel-button").style.display = "none"
+    }
+
+    document.getElementById("card").addEventListener("click", openForm)
+
+    document.getElementById("cancel-button").addEventListener("click", closeForm)
+    
+    
+    
+    })();
+
+    const test = new createListItem ("Workout", "Workout Now", "Today", "high")
+    
+    test.listInfo()
