@@ -1,25 +1,28 @@
 import './style.css';
 import { createListItem } from './classes';
+import { formToObject } from './classes';
 
+import { compareAsc, format } from "date-fns"
 
 const popupControl = (() => {
 
-    function openForm(){
-        document.getElementById("myForm").style.display = "grid"
+function openForm(){
+        myForm.style.display = "grid"
+    }
+    
+function closeForm(){
+        myForm.style.display = "none"
+        myForm.reset();
     }
 
-    function closeForm(){
-        document.getElementById("cancel-button").style.display = "none"
-    }
+document.getElementById("cancel-button").addEventListener("click", closeForm)
 
-    document.getElementById("card").addEventListener("click", openForm)
+document.getElementById("card").addEventListener("click", openForm)
 
-    document.getElementById("cancel-button").addEventListener("click", closeForm)
-    
-    
-    
-    })();
+})();
 
-    const test = new createListItem ("Workout", "Workout Now", "Today", "high")
-    
-    test.listInfo()
+const myForm = document.getElementById('add-item-prompt')
+
+if (myForm){
+    new formToObject(myForm)
+}
