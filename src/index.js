@@ -4,6 +4,8 @@ import { formToObject } from './classes';
 
 import { compareAsc, format } from "date-fns"
 
+const myForm = document.getElementById('add-item-prompt')
+
 const popupControl = (() => {
 
 function openForm(){
@@ -12,7 +14,7 @@ function openForm(){
     
 function closeForm(){
         myForm.style.display = "none"
-        myForm.reset();
+        myForm.reset(); 
     }
 
 document.getElementById("cancel-button").addEventListener("click", closeForm)
@@ -20,8 +22,6 @@ document.getElementById("cancel-button").addEventListener("click", closeForm)
 document.getElementById("card").addEventListener("click", openForm)
 
 })();
-
-const myForm = document.getElementById('add-item-prompt')
 
 if (myForm){
     new formToObject(myForm)

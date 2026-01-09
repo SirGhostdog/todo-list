@@ -12,6 +12,7 @@ export class createListItem{
 
     listInfo() {
         activeList.push(this)
+        addItemToPage();
     }
    
 }
@@ -44,4 +45,36 @@ export class formToObject{
         listObj.listInfo();
        
     }
+}
+
+function addItemToPage(){
+
+   function createEl(tag, className, text = '') {
+        const el = document.createElement(tag);
+        if (className) el.setAttribute("id", className) 
+        if (text) el.textContent = text
+        return el
+    }
+
+    const list = activeList[activeList.length - 1]
+
+    const card = createEl("div", "list-card");
+    const head = createEl("div", "card-header");
+    const foot = createEl("div", "card-footer");
+
+    head.append(createEl("div", "card-title", list .title));
+    head.append(createEl("div", "card-desc", list.desc));
+
+    foot.append(createEl("div", "card-due", list.due))
+    foot.append(createEl("div", "card-priotiy", list.priority))
+
+    card.append(head, foot);
+
+    const hero = document.getElementById("hero")
+    const addCard = document.getElementById("card")
+    hero.insertBefore(card, addCard);
+
+
+    console.log(list.title)
+
 }
