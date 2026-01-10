@@ -2,8 +2,6 @@ import './style.css';
 import { createListItem } from './classes';
 import { formToObject } from './classes';
 
-import { compareAsc, format } from "date-fns"
-
 const myForm = document.getElementById('add-item-prompt')
 
 const popupControl = (() => {

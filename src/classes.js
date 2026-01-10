@@ -1,4 +1,4 @@
-import { compareAsc, format } from "date-fns"
+import { format } from "date-fns"
 
 const activeList = []
 
@@ -60,6 +60,7 @@ function addItemToPage(){
     }
 
     function colorSelect(element) {
+
         const colors = [ '#ff7eb9','#7afcff','#cdfc93','#ce81ff' ]
 
         const randomIndex = Math.floor(Math.random() * colors.length);
@@ -67,6 +68,20 @@ function addItemToPage(){
         const randomColor = colors[randomIndex];
 
         element.style.backgroundColor = randomColor
+
+    }
+
+    function borderSelect(listElement, element){
+
+        const borderColors = ["#FF0000", "#ff7a2dff", "#00a100ff" ]
+
+        if (listElement == "Priority: High"){
+            element.style.border = (`${borderColors[0]}, solid, 3px`)
+        } else if (listElement == "Priority: Medium") {
+           element.style.border = (`${borderColors[1]}, solid, 3px`) 
+        } else if (listElement == "Priority: Low") {
+           element.style.border = (`${borderColors[2]}, solid, 3px`) 
+        }
     }
 
     const list = activeList[activeList.length - 1]
@@ -87,8 +102,6 @@ function addItemToPage(){
     const addCard = document.getElementById("card")
     hero.insertBefore(card, addCard);
     colorSelect(card);
-
-
-    console.log(list.title)
+    borderSelect(list.priority, card);
 
 }
