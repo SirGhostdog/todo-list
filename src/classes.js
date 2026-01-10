@@ -1,3 +1,5 @@
+import { compareAsc, format } from "date-fns"
+
 const activeList = []
 
 export class createListItem{
@@ -6,7 +8,7 @@ export class createListItem{
 
         this.title = title
         this.desc = desc
-        this.due = `Due by: ${due}`
+        this.due = `Due by: ${format(new Date(due), "MM/dd/yyyy")}`
         this.priority = `Priority: ${priority}`
     }
 
@@ -43,8 +45,9 @@ export class formToObject{
         
         const listObj = new createListItem(titleData, descData, dueData, priorityData)
         listObj.listInfo();
-       
     }
+
+ 
 }
 
 function addItemToPage(){
@@ -54,6 +57,16 @@ function addItemToPage(){
         if (className) el.setAttribute("id", className) 
         if (text) el.textContent = text
         return el
+    }
+
+    function colorSelect(element) {
+        const colors = [ '#ff7eb9','#7afcff','#cdfc93','#ce81ff' ]
+
+        const randomIndex = Math.floor(Math.random() * colors.length);
+
+        const randomColor = colors[randomIndex];
+
+        element.style.backgroundColor = randomColor
     }
 
     const list = activeList[activeList.length - 1]
@@ -73,6 +86,7 @@ function addItemToPage(){
     const hero = document.getElementById("hero")
     const addCard = document.getElementById("card")
     hero.insertBefore(card, addCard);
+    colorSelect(card);
 
 
     console.log(list.title)

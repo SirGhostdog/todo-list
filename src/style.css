@@ -52,7 +52,7 @@ body {
     background-color: #fcf989;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-    gap: 8%;
+    gap: 3%;
 }
 
 #card,
@@ -76,7 +76,6 @@ body {
 #list-card{
   justify-content: space-between;
   border: solid rgb(17, 23, 24);
-  background-color:rgb(122,252,255);
   color: rgb(0, 0, 0);
 }
 
