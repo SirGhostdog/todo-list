@@ -1,8 +1,11 @@
 import './style.css';
-import { createListItem } from './classes';
 import { formToObject } from './classes';
 
+import { removeCardControl } from './classes';
+
 const myForm = document.getElementById('add-item-prompt')
+const remove = document.getElementById('card-remove')
+const card = document.getElementById("list-card")
 
 const popupControl = (() => {
 
@@ -21,6 +24,4 @@ document.getElementById("card").addEventListener("click", openForm)
 
 })();
 
-if (myForm){
-    new formToObject(myForm)
-}
+if (myForm) new formToObject(myForm)

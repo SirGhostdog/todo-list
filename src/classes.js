@@ -47,15 +47,17 @@ export class formToObject{
         listObj.listInfo();
     }
 
- 
 }
+
+
 
 function addItemToPage(){
 
-   function createEl(tag, className, text = '') {
+   function createEl(tag, className, text, edit) {
         const el = document.createElement(tag);
-        if (className) el.setAttribute("id", className) 
+        if (className) el.setAttribute("class", className) 
         if (text) el.textContent = text
+        if (edit) className.contentEditable = "true"
         return el
     }
 
@@ -90,18 +92,56 @@ function addItemToPage(){
     const head = createEl("div", "card-header");
     const foot = createEl("div", "card-footer");
 
-    head.append(createEl("div", "card-title", list .title));
+    head.append(createEl("div", "card-title", list.title));
     head.append(createEl("div", "card-desc", list.desc));
 
     foot.append(createEl("div", "card-due", list.due))
-    foot.append(createEl("div", "card-priotiy", list.priority))
+    foot.append(createEl("div", "card-priority", list.priority))
+    const remove = createEl("button", "card-remove", "Remove")
+    foot.append(remove)
+
+    remove.addEventListener("click", function(){
+        card.remove()
+    })
 
     card.append(head, foot);
 
     const hero = document.getElementById("hero")
     const addCard = document.getElementById("card")
-    hero.insertBefore(card, addCard);
-    colorSelect(card);
-    borderSelect(list.priority, card);
 
+    hero.insertBefore(card, addCard);
+
+    colorSelect(card);
+
+    borderSelect(list.priority, card);
+    
 }
+
+class createProject {
+
+    constructor(item) {
+        this.item = item
+    }
+}
+
+// export class removeCardControl {
+
+//     constructor (button){
+//         this.button = button
+//         this.button.addEventListener('click', this.handleDelete.bind(this))
+//     }
+
+//     handleDelete(event) {
+//         event.preventDefault();
+
+//         this.removeCard();
+//     }
+
+//     removeCard(){
+
+//         this.button.parentNode.remove();
+//         console.log("delete")
+//     }
+// }
+
+

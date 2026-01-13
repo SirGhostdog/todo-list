@@ -56,12 +56,12 @@ body {
 }
 
 #card,
-#list-card{
+.list-card{
   display: flex;
   flex-direction: column;
   margin: 25px;
   max-height: 400px;
-  width: 400px;
+  max-width: 400px;
 }
 
 #card{
@@ -73,12 +73,12 @@ body {
     
 }
 
-#list-card{
+.list-card{
   justify-content: space-between;
   color: rgb(0, 0, 0);
 }
 
-#card-header{
+.card-header{
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
@@ -86,15 +86,30 @@ body {
   padding: 20px;
 }
 
-#card-title{
+.card-title{
   font-size: 24px;
 }
 
-#card-footer{
+.card-footer{
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  padding-bottom: 5px;
   padding-inline: 10px;
   align-items: flex-end;
+}
+
+.card-remove{
+  background-color: #f44336; 
+  border: solid black;
+  color: white;
+  padding: 8px 8px;
+  text-align: center; 
+  text-decoration: none; 
+  display: inline-block; 
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 4px; 
+  transition: background-color 0.3s ease;
 }
 
 #card:hover{
