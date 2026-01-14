@@ -1,13 +1,9 @@
 import './style.css';
 import { formToObject } from './classes';
 
-import { removeCardControl } from './classes';
+const popupControl = (() => {
 
 const myForm = document.getElementById('add-item-prompt')
-const remove = document.getElementById('card-remove')
-const card = document.getElementById("list-card")
-
-const popupControl = (() => {
 
 function openForm(){
         myForm.style.display = "grid"
@@ -21,6 +17,21 @@ function closeForm(){
 document.getElementById("cancel-button").addEventListener("click", closeForm)
 
 document.getElementById("card").addEventListener("click", openForm)
+
+})();
+
+const openSidebar = (() => {
+
+    const sideBtn = document.getElementById("burger")
+
+    const sidebar = document.getElementById("sidebar")
+
+    const hero = document.getElementById("hero")
+    
+    sideBtn.addEventListener("click", function(){
+        sidebar.classList.toggle("active")
+        hero.classList.toggle("shifted")
+    })
 
 })();
 

@@ -50,15 +50,18 @@ export class formToObject{
 }
 
 
-
 function addItemToPage(){
 
    function createEl(tag, className, text, edit) {
         const el = document.createElement(tag);
         if (className) el.setAttribute("class", className) 
         if (text) el.textContent = text
-        if (edit) className.contentEditable = "true"
+        if (edit) document.querySelector(className).contentEditable = "true"
         return el
+    }
+
+    function editContent(name) {
+        name.contentEditable = "true"
     }
 
     function colorSelect(element) {
@@ -92,11 +95,17 @@ function addItemToPage(){
     const head = createEl("div", "card-header");
     const foot = createEl("div", "card-footer");
 
-    head.append(createEl("div", "card-title", list.title));
-    head.append(createEl("div", "card-desc", list.desc));
+    const title = createEl("div", "card-title", list.title)
+    const desc = createEl("div", "card-desc", list.desc)
+    const due = createEl("div", "card-due", list.due)
+    const priority = createEl("div", "card-priority", list.priority)
+    
+    head.append(title);
+    head.append(desc);
 
-    foot.append(createEl("div", "card-due", list.due))
-    foot.append(createEl("div", "card-priority", list.priority))
+    foot.append(due)
+    foot.append(priority)
+
     const remove = createEl("button", "card-remove", "Remove")
     foot.append(remove)
 
@@ -123,25 +132,5 @@ class createProject {
         this.item = item
     }
 }
-
-// export class removeCardControl {
-
-//     constructor (button){
-//         this.button = button
-//         this.button.addEventListener('click', this.handleDelete.bind(this))
-//     }
-
-//     handleDelete(event) {
-//         event.preventDefault();
-
-//         this.removeCard();
-//     }
-
-//     removeCard(){
-
-//         this.button.parentNode.remove();
-//         console.log("delete")
-//     }
-// }
 
 
