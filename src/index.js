@@ -1,22 +1,22 @@
 import './style.css';
-import { formToObject } from './classes';
+import { formToObject, projectToObject } from './classes';
+const myForm = document.getElementById('add-item-prompt')
+const promptForm = document.getElementById('add-project')
 
 const popupControl = (() => {
 
-const myForm = document.getElementById('add-item-prompt')
-
-function openForm(){
+    function openForm(){
         myForm.style.display = "grid"
     }
     
-function closeForm(){
+    function closeForm(){
         myForm.style.display = "none"
         myForm.reset(); 
     }
 
-document.getElementById("cancel-button").addEventListener("click", closeForm)
+    document.getElementById("cancel-button").addEventListener("click", closeForm)
 
-document.getElementById("card").addEventListener("click", openForm)
+    document.getElementById("card").addEventListener("click", openForm)
 
 })();
 
@@ -35,4 +35,11 @@ const openSidebar = (() => {
 
 })();
 
+
+
 if (myForm) new formToObject(myForm)
+
+if (promptForm) new projectToObject(promptForm)
+
+    
+

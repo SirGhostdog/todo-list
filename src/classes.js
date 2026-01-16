@@ -33,22 +33,26 @@ export class formToObject{
     }
     
     processForm() {
-        const promptData = new FormData(this.form)
-
+        const promptData = new FormData(this.form) 
+        
+            
         const titleData = promptData.get('title')
         const descData = promptData.get('desc')
         const dueData = promptData.get('due-date')
         const priorityData = promptData.get('priority')
 
+        
+
         this.form.style.display = "none";
         this.form.reset(); 
-        
+            
         const listObj = new createListItem(titleData, descData, dueData, priorityData)
         listObj.listInfo();
+
+            
     }
 
 }
-
 
 function addItemToPage(){
 
@@ -58,10 +62,6 @@ function addItemToPage(){
         if (text) el.textContent = text
         if (edit) document.querySelector(className).contentEditable = "true"
         return el
-    }
-
-    function editContent(name) {
-        name.contentEditable = "true"
     }
 
     function colorSelect(element) {
@@ -126,11 +126,64 @@ function addItemToPage(){
     
 }
 
+const projectsList = []
+
 class createProject {
 
     constructor(item) {
         this.item = item
     }
+
+    storeProject() {
+        projectsList.push(this)
+        addProjectToSidebar()
+    }
+
 }
+
+export class projectToObject{
+    
+    constructor (form){
+        this.form = form
+        this.form.addEventListener('submit', this.handleSubmit.bind(this));
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
+
+        this.processForm();
+    }
+    
+    processForm() {
+        const promptData = new FormData(this.form) 
+        const projectData = promptData.get('proj-name')
+        const projectObj = new createProject(projectData)
+
+        this.form.reset(); 
+
+        projectObj.storeProject(); 
+    }
+
+}
+
+function addProjectToSidebar(){
+
+       function createEl(tag, className, text) {
+        const el = document.createElement(tag);
+        if (className) el.setAttribute("class", className) 
+        if (text) el.textContent = text
+        return el
+    }
+
+    const list = projectsList[projectsList.length - 1]
+
+    const project = createEl("div", "project-name", list.item)
+
+    const sidebar = document.getElementById("sidebar")
+    const addProject = document.getElementById("add-project")
+
+    sidebar.insertBefore(project,addProject)
+}
+
 
 
