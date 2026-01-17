@@ -93,10 +93,18 @@ body {
 }
 
 .project-name{
-  border: #04AA6D solid;
+  border: #0f518a solid;
+  background-color: rgb(184, 184, 184);
+  border-radius: 4px;
   font-size: 24px;
   padding: 4px;
+  padding-inline: 12px;
   margin: 4px;
+}
+
+.project-name:hover{
+  cursor: pointer;
+  background-color: rgb(168, 168, 168);
 }
 
 #card,
