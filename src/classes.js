@@ -49,7 +49,6 @@ export class formToObject{
         const listObj = new createListItem(titleData, descData, dueData, priorityData)
         listObj.listInfo();
 
-            
     }
 
 }
@@ -115,7 +114,7 @@ function addItemToPage(){
 
     card.append(head, foot);
 
-    const hero = document.getElementById("hero")
+    const hero = document.getElementById("main-content")
     const addCard = document.getElementById("card")
 
     hero.insertBefore(card, addCard);
@@ -123,10 +122,12 @@ function addItemToPage(){
     colorSelect(card);
 
     borderSelect(list.priority, card);
+
+   
     
 }
 
-const projectsList = []
+const projectsList = [{item:""}]
 
 class createProject {
 
@@ -137,6 +138,7 @@ class createProject {
     storeProject() {
         projectsList.push(this)
         addProjectToSidebar()
+        console.log(projectsList)
     }
 
 }
@@ -170,7 +172,9 @@ function addProjectToSidebar(){
 
        function createEl(tag, className, text) {
         const el = document.createElement(tag);
-        if (className) el.setAttribute("class", className) 
+        if (className) el.setAttribute("class", className)
+            el.setAttribute("id", "sidebar-project-title")
+            el.setAttribute("contenteditable", "true") 
         if (text) el.textContent = text
         return el
     }
@@ -183,7 +187,40 @@ function addProjectToSidebar(){
     const addProject = document.getElementById("add-project")
 
     sidebar.insertBefore(project,addProject)
+
+    storeListInJSON();
+    
 }
+
+function storeListInJSON(){
+    const projects = document.querySelectorAll(".project-name")
+        projects.forEach(project => {
+
+            project.addEventListener("click", function(){
+
+                const cards = document.querySelectorAll(".list-card")
+                const heroTitle = document.getElementById("hero-project-title")
+
+                cards.forEach(card => {
+                    if(project.innerText !== heroTitle.innerText){
+                        card.remove()   
+                    } 
+                })
+                
+                heroTitle.innerText = project.innerText
+
+                localStorage.setItem(JSON.stringify(project.innerText), JSON.stringify(activeList))
+                console.log(localStorage)
+                // projectsList.length = 0
+                // activeList.length = 0
+                // console.log(activeList,projectsList)
+            })  
+    })
+     
+}
+
+// localStorage.clear()
+// console.log(localStorage)
 
 
 

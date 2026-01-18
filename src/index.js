@@ -36,7 +36,6 @@ const openSidebar = (() => {
 })();
 
 
-
 if (myForm) new formToObject(myForm)
 
 if (promptForm) new projectToObject(promptForm)
