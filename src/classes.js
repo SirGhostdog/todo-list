@@ -1,6 +1,6 @@
 import { format } from "date-fns"
 
-const activeList = []
+let activeList = []
 
 export class createListItem{
 
@@ -15,8 +15,15 @@ export class createListItem{
     listInfo() {
         activeList.push(this)
         addItemToPage();
+        storeListInJSON();
     }
    
+}
+
+function storeListInJSON(){
+    const projectTitle = document.getElementById("hero-project-title")
+    localStorage.setItem(projectTitle.innerText, JSON.stringify(activeList))
+    // console.log(localStorage)
 }
 
 export class formToObject{
@@ -122,9 +129,7 @@ function addItemToPage(){
     colorSelect(card);
 
     borderSelect(list.priority, card);
-
-   
-    
+  
 }
 
 const projectsList = [{item:""}]
@@ -138,7 +143,6 @@ class createProject {
     storeProject() {
         projectsList.push(this)
         addProjectToSidebar()
-        console.log(projectsList)
     }
 
 }
@@ -188,12 +192,14 @@ function addProjectToSidebar(){
 
     sidebar.insertBefore(project,addProject)
 
-    storeListInJSON();
+    switchListInJSON();
     
 }
 
-function storeListInJSON(){
+function switchListInJSON(){
+
     const projects = document.querySelectorAll(".project-name")
+
         projects.forEach(project => {
 
             project.addEventListener("click", function(){
@@ -204,23 +210,30 @@ function storeListInJSON(){
                 cards.forEach(card => {
                     if(project.innerText !== heroTitle.innerText){
                         card.remove()   
-                    } 
+                    }
                 })
-                
-                heroTitle.innerText = project.innerText
 
-                localStorage.setItem(JSON.stringify(project.innerText), JSON.stringify(activeList))
-                console.log(localStorage)
-                // projectsList.length = 0
-                // activeList.length = 0
-                // console.log(activeList,projectsList)
+                activeList = []
+                activeList = (JSON.parse(localStorage.getItem(project.innerText)))
+
+                console.log(localStorage.getItem(project.innerText))
+
+                console.log(project.innerText)
+              
+
+                addItemToPage()
+                console.log(activeList)
+                
+
+                heroTitle.innerText = project.innerText
+                
             })  
     })
      
 }
 
 // localStorage.clear()
-// console.log(localStorage)
+console.log(localStorage)
 
 
 
