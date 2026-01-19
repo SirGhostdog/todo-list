@@ -9,7 +9,7 @@ body {
   color: rgb(22, 22, 22);
   background-color: rgb(96, 51, 29);
   padding-inline: 40px;
-  z-index: 1;
+  z-index: 2;
   border-bottom: rgb(43, 43, 43) solid 3px;
   font-family: 'Courier New', Courier, monospace;
   justify-content: space-between;
@@ -62,6 +62,7 @@ body {
   gap: 3%;
 }
 
+#banner.shifted,
 #hero.shifted{
   margin-left: 250px;
 }
@@ -73,7 +74,7 @@ body {
   height:200%;
   width: 250px;
   position: fixed;
-  z-index: 2;
+  z-index: 1;
   top: 1;
   left: -252px;
   background-color: #fffa60;

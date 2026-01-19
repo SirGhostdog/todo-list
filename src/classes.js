@@ -1,6 +1,6 @@
 import { format } from "date-fns"
 
-let activeList = []
+let activeList = (JSON.parse(localStorage.getItem("Default") || "[]"))
 
 export class createListItem{
 
@@ -14,7 +14,7 @@ export class createListItem{
 
     listInfo() {
         activeList.push(this)
-        addItemToPage();
+        addItemToPage(this);
         storeListInJSON();
     }
    
@@ -23,7 +23,6 @@ export class createListItem{
 function storeListInJSON(){
     const projectTitle = document.getElementById("hero-project-title")
     localStorage.setItem(projectTitle.innerText, JSON.stringify(activeList))
-    // console.log(localStorage)
 }
 
 export class formToObject{
@@ -48,8 +47,6 @@ export class formToObject{
         const dueData = promptData.get('due-date')
         const priorityData = promptData.get('priority')
 
-        
-
         this.form.style.display = "none";
         this.form.reset(); 
             
@@ -60,7 +57,7 @@ export class formToObject{
 
 }
 
-function addItemToPage(){
+function addItemToPage(list){
 
    function createEl(tag, className, text, edit) {
         const el = document.createElement(tag);
@@ -94,8 +91,6 @@ function addItemToPage(){
            element.style.border = (`${borderColors[2]}, solid, 3px`) 
         }
     }
-
-    const list = activeList[activeList.length - 1]
 
     const card = createEl("div", "list-card");
     const head = createEl("div", "card-header");
@@ -131,8 +126,7 @@ function addItemToPage(){
     borderSelect(list.priority, card);
   
 }
-
-const projectsList = [{item:""}]
+const projectsList =  []
 
 class createProject {
 
@@ -142,9 +136,8 @@ class createProject {
 
     storeProject() {
         projectsList.push(this)
-        addProjectToSidebar()
+        addProjectToSidebar(this)
     }
-
 }
 
 export class projectToObject{
@@ -164,7 +157,6 @@ export class projectToObject{
         const promptData = new FormData(this.form) 
         const projectData = promptData.get('proj-name')
         const projectObj = new createProject(projectData)
-
         this.form.reset(); 
 
         projectObj.storeProject(); 
@@ -172,7 +164,7 @@ export class projectToObject{
 
 }
 
-function addProjectToSidebar(){
+function addProjectToSidebar(proj){
 
        function createEl(tag, className, text) {
         const el = document.createElement(tag);
@@ -183,9 +175,7 @@ function addProjectToSidebar(){
         return el
     }
 
-    const list = projectsList[projectsList.length - 1]
-
-    const project = createEl("div", "project-name", list.item)
+    const project = createEl("div", "project-name", proj.item)
 
     const sidebar = document.getElementById("sidebar")
     const addProject = document.getElementById("add-project")
@@ -208,23 +198,14 @@ function switchListInJSON(){
                 const heroTitle = document.getElementById("hero-project-title")
 
                 cards.forEach(card => {
-                    if(project.innerText !== heroTitle.innerText){
-                        card.remove()   
-                    }
+                        card.remove()    
                 })
 
                 activeList = []
-                activeList = (JSON.parse(localStorage.getItem(project.innerText)))
-
-                console.log(localStorage.getItem(project.innerText))
-
-                console.log(project.innerText)
-              
-
-                addItemToPage()
-                console.log(activeList)
+                activeList = (JSON.parse(localStorage.getItem(project.innerText)))??[]
+                loadDOMList()
                 
-
+                
                 heroTitle.innerText = project.innerText
                 
             })  
@@ -232,8 +213,32 @@ function switchListInJSON(){
      
 }
 
+function loadDOMList(){
+    activeList.forEach(card =>{
+        if(card !== null){
+            addItemToPage(card) 
+        }   
+    })
+}
+
+function loadProjectList(){
+
+    const allKeys = Object.keys(localStorage)
+
+    allKeys.forEach(key => {
+      const newProj =  new createProject(key)
+      addProjectToSidebar(newProj)
+    })
+}
 // localStorage.clear()
-console.log(localStorage)
+loadProjectList();
+loadDOMList();
 
-
+document.addEventListener("DOMContentLoaded", function(){
+    const heroTitle = document.getElementById("hero-project-title") 
+    if(Object.keys(localStorage) == 0){
+        const defProj =  new createProject("Default")
+        addProjectToSidebar(defProj)
+    }
+})
 
