@@ -23,6 +23,7 @@ export class createListItem{
 function storeListInJSON(){
     const projectTitle = document.getElementById("hero-project-title")
     localStorage.setItem(projectTitle.innerText, JSON.stringify(activeList))
+    console.log(localStorage)
 }
 
 export class formToObject{
@@ -112,6 +113,8 @@ function addItemToPage(list){
 
     remove.addEventListener("click", function(){
         card.remove()
+        // document.oninput = storeListInJSON()
+        // console.log(localStorage)
     })
 
     card.append(head, foot);
@@ -191,6 +194,7 @@ function addProjectToSidebar(proj){
 
     remove.addEventListener("click", function(){
         projectItem.remove()
+        localStorage.removeItem(proj.item)
     })
 
     sidebar.insertBefore(projectItem,addProject)
