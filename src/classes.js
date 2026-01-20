@@ -169,18 +169,31 @@ function addProjectToSidebar(proj){
        function createEl(tag, className, text) {
         const el = document.createElement(tag);
         if (className) el.setAttribute("class", className)
+        if(className == "project-name") {
             el.setAttribute("id", "sidebar-project-title")
             el.setAttribute("contenteditable", "true") 
+        }
         if (text) el.textContent = text
         return el
     }
-
-    const project = createEl("div", "project-name", proj.item)
-
+    
     const sidebar = document.getElementById("sidebar")
     const addProject = document.getElementById("add-project")
 
-    sidebar.insertBefore(project,addProject)
+    const projectItem =createEl("div", "project-item")
+    const project = createEl("div", "project-name", proj.item)
+    const remove = createEl("button", "project-remove", "🗑")
+
+    sidebar.append(projectItem)
+
+    projectItem.append(project)
+    projectItem.append(remove)
+
+    remove.addEventListener("click", function(){
+        projectItem.remove()
+    })
+
+    sidebar.insertBefore(projectItem,addProject)
 
     switchListInJSON();
     
