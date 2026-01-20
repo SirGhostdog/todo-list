@@ -113,8 +113,12 @@ function addItemToPage(list){
 
     remove.addEventListener("click", function(){
         card.remove()
-        // document.oninput = storeListInJSON()
-        // console.log(localStorage)
+        const itemToRemove = list
+        const index = activeList.indexOf(itemToRemove)
+        if(index >-1){
+            activeList.splice(index, 1)
+        }
+        storeListInJSON()
     })
 
     card.append(head, foot);
