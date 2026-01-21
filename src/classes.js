@@ -23,7 +23,6 @@ export class createListItem{
 function storeListInJSON(){
     const projectTitle = document.getElementById("hero-project-title")
     localStorage.setItem(projectTitle.innerText, JSON.stringify(activeList))
-    console.log(localStorage)
 }
 
 export class formToObject{
@@ -133,6 +132,7 @@ function addItemToPage(list){
     borderSelect(list.priority, card);
   
 }
+
 const projectsList =  []
 
 class createProject {
@@ -178,7 +178,6 @@ function addProjectToSidebar(proj){
         if (className) el.setAttribute("class", className)
         if(className == "project-name") {
             el.setAttribute("id", "sidebar-project-title")
-            el.setAttribute("contenteditable", "true") 
         }
         if (text) el.textContent = text
         return el
@@ -251,7 +250,7 @@ function loadProjectList(){
       addProjectToSidebar(newProj)
     })
 }
-// localStorage.clear()
+
 loadProjectList();
 loadDOMList();
 
